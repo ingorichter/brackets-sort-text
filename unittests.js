@@ -30,10 +30,11 @@ define(function (require, exports, module) {
         CommandManager  = brackets.getModule("command/CommandManager"),
         LineSorter      = require("main");
 
-    describe("Line Sorter", function () {
+    describe("Sort Text", function () {
         var testEditor,
-            testDocument;
-        
+            testDocument,
+            codeMirror;
+
         var defaultContent = "Wisconsin\n" +
                              "\n" +
                              "Madison\n" +
@@ -43,17 +44,24 @@ define(function (require, exports, module) {
                              "\n" +
                              "Denver\n" +
                              "Boston";
-        
+
+        // Helper function
+        function getCodeMirror() {
+            return testEditor._codeMirror;
+        }
+
         beforeEach(function () {
             // create Editor instance (containing a CodeMirror instance)
             var mock = SpecRunnerUtils.createMockEditor(defaultContent, "text");
             testEditor = mock.editor;
             testDocument = mock.doc;
-            
+
             // inject the editor
             spyOn(LineSorter, '_getEditor').andCallFake(function () {
                 return testEditor;
             });
+
+            codeMirror = getCodeMirror();
         });
 
         afterEach(function () {
@@ -62,55 +70,70 @@ define(function (require, exports, module) {
             testDocument = null;
         });
 
-        // Helper function
-        function getCodeMirror() {
-            return testEditor._codeMirror;
-        }
-        
         describe("Sort lines", function () {
             it("should sort lexicographically all lines in the document", function () {
                 LineSorter.sortLines();
-                
-                var codeMirror = getCodeMirror();
-                var start = {line: 0, ch: 0},
-                    end   = {line: codeMirror.lineCount(), ch: 0};
-                
-                var lines = codeMirror.getRange(start, end);
+
+                var lines = codeMirror.getValue();
 
                 expect(lines.split("\n").toString()).toBe(",,Ann Arbor,Boston,Denver,Madison,New York,San Francisco,Wisconsin");
             });
 
             it("should sort lexicographically the selection in the document", function () {
-                var codeMirror = getCodeMirror();
-                var start = {line: 0, ch: 0},
-                    end   = {line: codeMirror.lineCount(), ch: 0};
-                
                 // select some lines
                 codeMirror.doc.setSelection({line: 3, ch: 0}, {line: 5, ch: 0});
-                
+
                 LineSorter.sortLines();
-                var lines = codeMirror.getRange(start, end);
+                var lines = codeMirror.getValue();
 
                 expect(lines.split("\n").toString()).toBe("Wisconsin,,Madison,Ann Arbor,New York,San Francisco,,Denver,Boston");
             });
         });
-        
+
         describe("Reverse all lines in document", function () {
             it("should return all lines in reverse order", function () {
-                var codeMirror = getCodeMirror();
-                var start = {line: 0, ch: 0},
-                    end   = {line: codeMirror.lineCount(), ch: 0};
-
                 LineSorter.reverseLines();
-                
-                var lines = codeMirror.getRange(start, end);
+
+                var lines = codeMirror.getValue();
 
                 expect(lines.split("\n").toString()).toBe("Boston,Denver,,San Francisco,Ann Arbor,New York,Madison,,Wisconsin");
-                
+
                 LineSorter.reverseLines();
-                lines = codeMirror.getRange(start, end);
+                lines = codeMirror.getValue();
 
                 expect(lines.split("\n").toString()).toBe("Wisconsin,,Madison,New York,Ann Arbor,San Francisco,,Denver,Boston");
+            });
+
+            it("should do nothing if document is empty", function () {
+                testDocument.setText("");
+
+                LineSorter.reverseLines();
+
+                var lines = codeMirror.getValue();
+
+                expect(lines).toBe("");
+            });
+        });
+
+        describe("Sort all lines by length", function () {
+            it("should sort all lines by length", function () {
+                LineSorter.sortLinesByLength();
+
+                var lines = codeMirror.getValue();
+                expect(lines.split("\n").toString()).toBe(",,Denver,Boston,Madison,New York,Wisconsin,Ann Arbor,San Francisco");
+            });
+        });
+
+        describe("Shuffle lines", function () {
+            it("should return lines in different order than the original line order", function () {
+                var textBeforeShuffle = codeMirror.getValue();
+
+                LineSorter.shuffleLines();
+
+                var textAfterShuffle = codeMirror.getValue();
+
+                expect(textBeforeShuffle).not.toBe(textAfterShuffle);
+                expect(textBeforeShuffle.length).toBe(textAfterShuffle.length);
             });
         });
     });

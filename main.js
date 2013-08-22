@@ -29,30 +29,34 @@ define(function (require, exports, module) {
 
     var CommandManager = brackets.getModule("command/CommandManager"),
         EditorManager  = brackets.getModule("editor/EditorManager"),
-        Menus          = brackets.getModule("command/Menus"),
-        VerEx          = require("thirdparty/JSVerbalExpressions/VerbalExpressions");
+        Menus          = brackets.getModule("command/Menus");
 
     function _getEditor() {
         return EditorManager.getFocusedEditor();
     }
-    
+
+    function _getCodeMirror() {
+        var editor = exports._getEditor();
+        return editor._codeMirror;
+    }
+
     // Function to run when the menu item is clicked
     function handleSortLines() {
         var editor = exports._getEditor();
-        var codemirror = editor._codeMirror;
-        
+        var codemirror = _getCodeMirror();
+
         // TODO:
         // * sort all lines (+)
         // * sort only selected lines (+)
         // * sort lines language agnostic (all/selection)
-        // * randomize lines
+        // * randomize lines (+)
         // * reverse lines (+)
         // * Unique lines
-        // * sort lines by length
+        // * sort lines by length (+)
         if (editor) {
             if (editor.lineCount() > 0) {
                 console.log("Let's get it sorted");
-                
+
                 if (codemirror.somethingSelected()) {
                     var selection = codemirror.getSelection();
                     var removedLastLineBreak = false;
@@ -65,67 +69,109 @@ define(function (require, exports, module) {
                     }
 
                     var allLines = selection.split('\n');
-                    
+
                     allLines.sort(function (a, b) {
                         return a.localeCompare(b);
                     });
-                    
+
                     codemirror.replaceSelection(allLines.join('\n') + (removedLastLineBreak ? "\n" : ""));
                 } else {
-                    var start = {line: 0, ch: 0},
-                        end   = {line: codemirror.lineCount(), ch: 0};
+                    var lines = codemirror.getValue(),
+                        allLines = lines.split('\n');
 
-                    var lines = codemirror.getRange(start, end);
-                    var allLines = lines.split('\n');
-    
                     allLines.sort(function (a, b) {
                         return a.localeCompare(b);
                     });
-                    
-                    console.log(allLines);
-                    codemirror.replaceRange(allLines, start, end);
+
+                    codemirror.setValue(allLines.join("\n"));
                 }
             }
         }
     }
 
     function handleReverseLines() {
-        var editor = exports._getEditor();
-        var codemirror = editor._codeMirror;
+        var codemirror = _getCodeMirror();
 
-        var start = {line: 0, ch: 0},
-            end   = {line: codemirror.lineCount(), ch: 0};
-
-        var lines = codemirror.getRange(start, end),
+        var lines = codemirror.getValue(),
             allLines = lines.split('\n');
 
         var i;
         for (i = 0; i < allLines.length / 2; i++) {
-            var tmp = allLines[i];
-            allLines[i] = allLines[allLines.length - 1 - i];
-            allLines[allLines.length - 1 - i] = tmp;
+            var index = allLines.length - 1 - i;
+
+            var tmp         = allLines[i];
+            allLines[i]     = allLines[index];
+            allLines[index] = tmp;
         }
-        
-        codemirror.replaceRange(allLines, start, end);
+
+        codemirror.setValue(allLines.join("\n"));
     }
-    
+
+    function handleSortByLength() {
+        var codemirror = _getCodeMirror();
+
+        var lines = codemirror.getValue(),
+            allLines = lines.split('\n');
+
+        allLines.sort(function (a, b) {
+            return a.length - b.length;
+        });
+
+        codemirror.setValue(allLines.join("\n"));
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function handleShuffleLines() {
+        var codemirror = _getCodeMirror();
+
+        var lines = codemirror.getValue(),
+            allLines = lines.split('\n');
+
+        // probably not the most efficient way of doing it...
+        var i,
+            lineCount = allLines.length,
+            maxArrayIndex = lineCount - 1;
+
+        for (i = 0; i < lineCount; i++) {
+            var newIndex = getRandomInt(i, maxArrayIndex);
+
+            var tmp         = allLines[i];
+            allLines[i]     = allLines[newIndex];
+            allLines[newIndex] = tmp;
+        }
+
+        codemirror.setValue(allLines.join("\n"));
+    }
+
     // First, register a command - a UI-less object associating an id to a handler
-    var COMMAND_SORTLINES = "de.richter.brackets.extension.LineSorter.sortLines";   // package-style naming to avoid collisions
-    var COMMAND_REVERSELINES = "de.richter.brackets.extension.LineSorter.reverseLines";   // package-style naming to avoid collisions
-    CommandManager.register("Sort Lines", COMMAND_SORTLINES, handleSortLines);
+    var COMMAND_SORTLINES = "de.richter.brackets.extension.brackets-sort-text.sortLines";   // package-style naming to avoid collisions
+    var COMMAND_REVERSELINES = "de.richter.brackets.extension.brackets-sort-text.reverseLines";   // package-style naming to avoid collisions
+    var COMMAND_SORTLINESBYLENGTH = "de.richter.brackets.extension.brackets-sort-text.sortLinesByLength";   // package-style naming to avoid collisions
+    var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines";   // package-style naming to avoid collisions
+
+    CommandManager.register("Sort Lines",    COMMAND_SORTLINES,    handleSortLines);
     CommandManager.register("Reverse Lines", COMMAND_REVERSELINES, handleReverseLines);
+    CommandManager.register("Sort Lines by length", COMMAND_SORTLINESBYLENGTH, handleSortByLength);
+    CommandManager.register("Shuffle Lines", COMMAND_SHUFFLELINES, handleShuffleLines);
 
     // Then create a menu item bound to the command
     // The label of the menu item is the name we gave the command (see above)
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
     if (menu) {
-        menu.addMenuItem(COMMAND_SORTLINES, [{key: "F5"}]);
-        menu.addMenuItem(COMMAND_REVERSELINES, [{key: "Shift-F5"}]);
+        menu.addMenuItem(COMMAND_SORTLINES,         [{key: "F5"}]);
+        menu.addMenuItem(COMMAND_REVERSELINES,      [{key: "Shift-F5"}]);
+        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F5"}]);
+        menu.addMenuItem(COMMAND_SHUFFLELINES,      [{key: "Alt-F5"}]);
     }
 
-    exports.sortLines    = handleSortLines;
-    exports.reverseLines = handleReverseLines;
+    exports.sortLines         = handleSortLines;
+    exports.reverseLines      = handleReverseLines;
+    exports.sortLinesByLength = handleSortByLength;
+    exports.shuffleLines      = handleShuffleLines;
     // for testing
-    exports._getEditor     = _getEditor;
+    exports._getEditor        = _getEditor;
 });
