@@ -1,0 +1,13 @@
+{
+    "name": "brackets-sort-text",
+    "title": "Brackets Sort Text",
+    "description": "Sort Text extension for Brackets",
+    "author" : "Ingo Richter <ingo.richter@gmail.com>",
+    "version": "0.1.0",
+    "homepage": "https://github.com/ingorichter/brackets-sort-text/",
+    "bugs": "https://github.com/ingorichter/brackets-sort-text/issues",
+    "repository" : { 
+        "type" : "git",
+         "url" : "https://github.com/ingorichter/brackets-sort-text.git"
+    }
+}
