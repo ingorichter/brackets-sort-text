@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Ingo Richter.
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -18,16 +18,17 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
+ *
  */
 
 /*jslint vars: true, plusplus: true, devel: true, browser: true, nomen: true, indent: 4, maxerr: 50 */
-/*global define, describe, it, xit, expect, beforeEach, afterEach, waitsFor, runs, $, brackets, spyOn, waitsForDone */
+/*global define, describe, it, expect, beforeEach, afterEach, brackets, spyOn */
 
-define(function (require, exports, module) {
+//define(function (require, exports, module) {
+define(function (require) {
     "use strict";
 
     var SpecRunnerUtils = brackets.getModule("spec/SpecRunnerUtils"),
-        CommandManager  = brackets.getModule("command/CommandManager"),
         LineSorter      = require("main");
 
     describe("Sort Text", function () {
@@ -44,6 +45,8 @@ define(function (require, exports, module) {
                              "\n" +
                              "Denver\n" +
                              "Boston";
+
+        var duplicateLines = defaultContent + "\n" + defaultContent;
 
         // Helper function
         function getCodeMirror() {
@@ -134,6 +137,23 @@ define(function (require, exports, module) {
 
                 expect(textBeforeShuffle).not.toBe(textAfterShuffle);
                 expect(textBeforeShuffle.length).toBe(textAfterShuffle.length);
+            });
+        });
+
+        describe("Unique lines", function () {
+            beforeEach(function () {
+                testDocument.setText(duplicateLines);
+            });
+
+            it("should return all unique lines in sorted order", function () {
+                var textBeforeUnique = codeMirror.getValue();
+
+                LineSorter.removeDuplicateLines();
+
+                var textAfterUnique = codeMirror.getValue();
+
+                expect(textBeforeUnique).not.toBe(textAfterUnique);
+                expect(textAfterUnique.split("\n").toString()).toBe(",Ann Arbor,Boston,Denver,Madison,New York,San Francisco,Wisconsin");
             });
         });
     });

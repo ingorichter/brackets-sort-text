@@ -1,13 +1,32 @@
 {
-    "name": "brackets-sort-text",
-    "title": "Brackets Sort Text",
-    "description": "Sort Text extension for Brackets",
-    "author" : "Ingo Richter <ingo.richter@gmail.com>",
-    "version": "0.1.0",
-    "homepage": "https://github.com/ingorichter/brackets-sort-text/",
-    "bugs": "https://github.com/ingorichter/brackets-sort-text/issues",
-    "repository" : { 
-        "type" : "git",
-         "url" : "https://github.com/ingorichter/brackets-sort-text.git"
-    }
+  "name": "brackets-sort-text",
+  "title": "Brackets Sort Text",
+  "description": "Sort Text extension for Brackets",
+  "author": "Ingo Richter <ingo.richter+github@gmail.com>",
+  "license": "MIT",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ingorichter/brackets-sort-text/",
+  "bugs": "https://github.com/ingorichter/brackets-sort-text/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ingorichter/brackets-sort-text.git"
+  },
+  "keywords": [
+    "brackets",
+    "sort",
+    "utils"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-mocha": "~0.3.0",
+    "load-grunt-tasks": "~0.1.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-compress": "~0.5.2",
+    "time-grunt": "~0.1.1",
+    "grunt-cli": "~0.1.9"
+  },
+  "engines": {
+    "brackets": ">=0.30.0"
+  }
 }

@@ -1,0 +1,175 @@
+
+
+
+total 9704
+drwxrwxr-x+ 171 irichter  staff     5814 Aug 21 18:45 .
+drwxr-xr-x    5 root      admin      170 Feb 15  2013 ..
+drwxr-xr-x    3 irichter  staff      102 May 20 14:43 git
+drwxr-xr-x    4 irichter  staff      136 Dec  6  2011 .m2
+drwxr-xr-x    2 root      staff       68 Aug 11 01:23 tmp
+drwxr-xr-x    4 irichter  staff      136 Jun  7  2011 .ant
+drwxr-xr-x   16 irichter  staff      544 Aug  8 11:23 .gvm
+drwx------    8 irichter  staff      272 Nov 19  2012 .ddd
+drwxr-xr-x    3 irichter  staff      102 Jul 16 11:12 .pip
+drwx------    8 irichter  staff      272 Oct  2  2012 .ssh
+drwxr-xr-x    3 irichter  staff      102 Oct 27  2011 .swt
+-rw-------    1 irichter  staff     1024 Apr  3 15:05 .rnd
+drwxr-xr-x  322 irichter  staff    10948 Aug 20 15:43 .npm
+drwxr-xr-x    4 irichter  staff      136 Apr  6  2011 logs
+drwxr-xr-x    4 irichter  staff      136 May  6  2010 .gem
+drwxr-xr-x    4 irichter  staff      136 Oct 12  2012 .sbt
+-rw-r--r--    1 irichter  staff      195 May 11  2012 .hgrc
+drwxr-xr-x    2 irichter  staff       68 Dec 13  2011 .wapi
+drwx------    3 irichter  staff      102 Apr  6  2010 .cups
+drwxr-xr-x    8 irichter  staff      272 Aug 12  2012 .cpan
+drwxr-xr-x    4 irichter  staff      136 Oct 12  2012 .ivy2
+drwxr-xr-x+   7 irichter  staff      238 Mar 25 11:31 Sites
+drwx------+   7 irichter  staff      238 Apr 21 09:59 Music
+-rw-r--r--    1 irichter  staff      878 Nov 28  2012 .gitk
+drwxr-xr-x    3 irichter  staff      102 Sep 13  2012 build
+drwx------+  50 irichter  staff     1700 Mar 25 11:31 Movies
+drwxr-xr-x@  20 irichter  staff      680 Jun  4 12:06 depots
+drwxr-xr-x    4 irichter  staff      136 Apr  9  2010 .adobe
+drwxr-xr-x    4 irichter  staff      136 Sep 14  2012 .cache
+-rw-r--r--    1 irichter  staff      683 May 14  2012 .ctags
+-rw-r--r--@   1 irichter  staff       47 Oct 31  2012 mm.cfg
+drwxr-xr-x    3 irichter  staff      102 May 17  2012 .local
+drwx------    5 irichter  staff      170 Aug 21 18:09 .Trash
+drwxr-xr-x   18 irichter  staff      612 Nov 19  2012 .fonts
+drwxr-x-wx+   9 irichter  staff      306 Mar 25 11:31 Public
+drwxr-xr-x    3 irichter  staff      102 Mar 21  2012 FIPLAB
+-rw-r--r--    1 irichter  staff      561 Feb 15  2013 .htoprc
+drwxr-xr-x    3 irichter  staff      102 Apr 25 16:04 .giteye
+drwxr-xr-x    3 irichter  staff      102 May  6  2010 .bundle
+drwxr-xr-x    8 irichter  staff      272 May 14  2012 .neocon
+drwxr-xr-x    3 irichter  staff      102 Dec 20  2012 .jstock
+drwxr-xr-x    9 irichter  staff      306 Aug  8 11:23 .gradle
+drwx------@  35 irichter  staff     1190 Aug 13 15:46 Dropbox
+drwxr-xr-x   28 irichter  staff      952 Apr 13  2012 .hudson
+drwx------@  88 irichter  staff     2992 Aug  9 13:36 Library
+drwxr-xr-x    8 irichter  staff      272 Aug 11 01:07 .config
+-rw-r--r--    1 irichter  staff      214 Feb 11  2013 .bashrc
+drwxr-xr-x    7 irichter  staff      238 Aug 20 18:02 Desktop
+drwxr-xr-x    3 irichter  staff      102 May 21  2012 .distcc
+drwxr-xr-x    7 irichter  staff      238 Sep 25  2012 .grails
+drwxr-xr-x    6 irichter  staff      204 Apr 30  2012 .groovy
+drwxr-xr-x    3 irichter  staff      102 Aug  9 09:47 .yeoman
+drwxr-xr-x   16 irichter  staff      544 Dec 18  2012 .android
+drwxr-xr-x    3 irichter  staff      102 Dec 19  2012 .deltafy
+drwxr-xr-x    4 irichter  staff      136 Apr 18  2011 .argouml
+-rw-r--r--    1 irichter  staff   604206 Feb 25 14:11 myVimLog
+drwxr-xr-x   11 irichter  staff      374 Apr  9 17:15 .eclipse
+drwxr-xr-x    3 irichter  staff      102 Nov 16  2012 .mplayer
+-rw-r--r--@   1 irichter  staff     2589 Jan 24  2011 todo.cfg
+drwx------+  49 irichter  staff     1666 Aug 12 10:40 Pictures
+drwx------   21 irichter  staff      714 Aug 21 18:41 .dropbox
+drwxr-xr-x  232 irichter  staff     7888 Aug 21 11:42 .vimundo
+drwxr-xr-x    5 irichter  staff      170 Jun 18  2012 Projects
+-rw-r--r--    1 irichter  staff      518 May  1  2012 .dbshell
+drwx------    2 irichter  staff       68 Sep 27  2011 .emacs.d
+-rw-------    1 irichter  staff      959 Aug 19 23:13 .lesshst
+drwxr-xr-x   14 irichter  staff      476 Aug 21 18:08 .vimswap
+-rw-r--r--    1 irichter  staff    35293 Aug 21 18:08 .viminfo
+drwxr-xr-x    8 irichter  staff      272 May 16  2012 .griffon
+-rw-------    1 irichter  staff       70 Aug 16  2011 .cvspass
+drwxr-xr-x    8 irichter  staff      272 Apr 17 23:04 .tomighty
+drwx------+  18 irichter  staff      612 Aug 19 14:36 Downloads
+drwxr-xr-x    6 irichter  staff      204 Jul 10 14:13 .node-gyp
+-rw-r--r--@   1 irichter  staff    43012 Aug 19 23:04 .DS_Store
+drwxr-xr-x    3 irichter  staff      102 Apr  4  2012 .EasyPmd2
+drwxr-xr-x+  99 irichter  staff     3366 Jun 26 23:59 Documents
+drwxr-xr-x    5 irichter  staff      170 Mar 22  2012 .netbeans
+drwxr-xr-x  329 irichter  staff    11186 Aug 21 18:08 .vimviews
+drwxr-xr-x    5 irichter  staff      170 Dec 19  2012 .titanium
+drwxr-xr-x   15 irichter  staff      510 Jun 14 13:32 .oh-my-zsh
+-rw-r--r--    1 irichter  staff    32972 Jun 28 13:32 .zcompdump
+-rw-r--r--    1 irichter  staff     1834 May  9  2012 ..hgrc.un~
+drwxr-xr-x  116 irichter  staff     3944 Aug 21 11:42 .vimbackup
+drwxr-xr-x    3 irichter  staff      102 Jan  9  2013 .vim.local
+drwx------    4 irichter  staff      136 Jun  9  2010 .smartbear
+-r--------    1 irichter  staff      772 Jul 26 11:36 .p4tickets
+drwxr-xr-x    4 irichter  staff      136 Sep 20  2010 .jdarkroom
+drwxr-xr-x    6 irichter  staff      204 Apr 18  2011 .mediathek
+-rw-r--r--    1 irichter  staff     2939 Sep 13  2010 config.xml
+drwxr-xr-x    3 irichter  staff      102 May  9 09:49 .lazybones
+drwxr-xr-x    4 irichter  staff      136 May 22  2012 .repoconfig
+drwxr-xr-x   14 irichter  staff      476 Aug 19 15:29 Screenshots
+drwxr-xr-x  109 irichter  staff     3706 Jan 23  2013 .fontconfig
+drwxr-xr-x    6 irichter  staff      204 Apr  1  2010 .subversion
+-rw-r--r--    1 irichter  staff      577 Aug 19 22:47 .anyconnect
+-rw-r--r--    1 irichter  staff     1871 May 14  2012 ..ctags.un~
+-rw-------    1 irichter  staff        0 Jan 23  2013 .Xauthority
+-rw-r--r--    1 irichter  staff       17 Aug 12 10:29 .zsh-update
+drwxr-xr-x    3 irichter  staff      102 Jan  8  2013 IdeaProjects
+-rw-------    1 irichter  staff   679261 Aug 21 18:45 .zsh_history
+-rw-r--r--    1 irichter  staff      127 Feb 21 11:20 .irb_history
+drwxr-xr-x    4 irichter  staff      136 Jul  9 13:52 node_modules
+drwxr-xr-x    2 irichter  staff       68 Apr 24  2012 .rest-client
+drwxr-xr-x    4 irichter  staff      136 Aug  8 10:18 Applications
+-rw-------    1 irichter  staff      581 Oct  4  2011 .gdb_history
+-rw-r--r--@   1 irichter  staff    54105 Jun 15  2011 testdata.txt
+-rw-------    1 irichter  staff     3827 Sep  6  2012 .octave_hist
+-rw-r--r--    1 irichter  staff     3079 Nov 30  2010 .ganttproject
+-rw-r--r--    1 irichter  staff     3780 Feb 25 12:24 vimrc.profile
+-rw-r--r--    1 irichter  staff      214 Feb 11  2013 .bash_profile
+-rw-r--r--    1 irichter  staff      722 Sep  7  2012 artifacts.xml
+drwxr-xr-x    4 irichter  staff      136 Sep  6  2012 sharedplugins
+-rw-r--r--    1 irichter  staff      120 May 14  2012 telemetry.cfg
+-rw-------    1 irichter  staff     5898 Jan 25  2013 .bash_history
+drwxr-xr-x    3 irichter  staff      102 Sep  5  2012 .LuminanceHDR
+-rw-r--r--    1 irichter  staff       73 May 14  2012 .vim_mru_files
+-rw-r--r--    1 irichter  staff      383 Nov 15  2011 .scala_history
+-rw-r--r--    1 irichter  staff     3147 Sep 13  2012 .recently-used
+-rw-------    1 irichter  staff      565 May  9  2011 .mysql_history
+-rw-r--r--    1 irichter  staff     9852 Feb 25 12:25 vim.startuptime
+-rw-------    1 irichter  staff      668 Jul 24 17:00 .sqlite_history
+drwxr-xr-x    9 irichter  staff      306 Jun 14 15:09 Calibre Library
+drwxr-xr-x    5 irichter  staff      170 Mar  7  2011 .todo.actions.d
+drwxr-xr-x    3 irichter  staff      102 Feb 28  2012 .node_libraries
+-rw-r--r--    1 irichter  staff       83 Jun 26  2010 .crash_reportrc
+-rw-r--r--    1 irichter  admin       27 Sep 24  2012 .hgignore_global
+drwxr-xr-x    6 irichter  staff      204 Dec 14  2011 soapUI-Tutorials
+-rw-r--r--    1 irichter  staff      391 Oct 16  2012 .eclipse_keyring
+-rw-r--r--    1 irichter  staff    16128 Mar 28 14:21 mvim.startuptime
+drwxr-xr-x    4 irichter  staff      136 Feb 21 11:59 NetBeansProjects
+drwx------@  13 irichter  staff      442 Jul 15 16:52 .chrome-devtools
+drwxr-xr-x    5 irichter  staff      170 Dec  5  2011 .subversion_IDEA
+-rw-r--r--    1 irichter  admin       13 Sep 24  2012 .gitignore_global
+-rw-r--r--    1 irichter  staff      209 Mar 28 14:40 .vimrc.local.test
+drwxr-xr-x    4 irichter  staff      136 May 10  2012 .BullseyeCoverage
+-rw-r--r--    1 irichter  staff      606 Oct 24  2012 gitconfig.original
+-rw-r--r--    1 irichter  staff     1719 May 10  2012 ..bash_profile.un~
+-rw-r--r--    1 irichter  staff     2898 Dec 16  2011 soapui-settings.xml
+-rw-r--r--    1 irichter  staff  1144096 Jun  7 18:19 ec-after-reflow.txt
+-rw-------    1 irichter  staff        3 Aug  6 10:55 .CFUserTextEncoding
+drwx------@   8 irichter  staff      272 Aug  8 11:17 Creative Cloud Files
+-rw-r--r--    1 irichter  staff  1144084 Jun  7 18:16 ec-before-reflow.txt
+-rw-r--r--    1 irichter  staff     9197 Jan 22  2013 sourced-files-vim.txt
+drwxr-xr-x    3 irichter  staff      102 May 16 06:13 AndroidStudioProjects
+-rw-r--r--    1 root      staff        0 Jul  8  2010 Office2011_Activation
+-rw-r--r--    1 irichter  staff     9813 Jul 27 00:17 .anyconnect-stats.txt
+-rw-r--r--    1 irichter  staff      161 Jun 20 13:45 Intel_XDKConfig.props
+-rw-r--r--    1 irichter  staff     5187 Jan 22  2013 sources-files-mvim.txt
+-rw-r--r--    1 irichter  staff      416 Jun 20 14:14 Intel_XDKServers.props
+-rw-r--r--    1 irichter  staff      968 Aug 15 18:27 .repopickle_.gitconfig
+drwxr-xr-x    3 irichter  staff      102 Apr 30  2010 .netbeans-registration
+-rw-r--r--    1 irichter  staff      131 May  4  2011 flexMonkeyPreferences.xml
+-rw-r--r--@   1 irichter  staff      289 May 20  2011 build-irichter.properties
+-rw-r--r--    1 irichter  staff      417 Jan 20  2012 default-soapui-workspace.xml
+-rw-r--r--    1 irichter  staff    26793 Jan 18  2012 exported-NetBeans-profile.xml
+-rw-r--r--    1 irichter  staff   869368 Jan 20  2012 LM-internal-soapui-project.xml
+lrwxr-xr-x    1 irichter  staff       22 Mar  5 22:51 .zshrc -> Dropbox/Dotfiles/zshrc
+lrwxr-xr-x    1 irichter  staff       22 Feb 24  2012 .gvimrc -> /Users/irichter/.vimrc
+drwxr-xr-x@   6 irichter  staff      204 Aug  9 13:35 Box Documents(ingo.richter@gmail.com)
+lrwxr-xr-x    1 irichter  staff       25 Mar  5 22:49 .zprofile -> Dropbox/Dotfiles/zprofile
+lrwxr-xr-x    1 irichter  staff       26 Aug 21 11:38 tmux.conf -> Dropbox/Dotfiles/tmux.conf
+lrwxr-xr-x    1 irichter  staff       33 Mar  5 22:40 .vim -> /Users/irichter/.spf13-vim-3/.vim
+-rw-r--r--    1 irichter  staff       36 Aug  5  2010 .org.eclipse.epp.usagedata.recording.userId
+lrwxr-xr-x    1 irichter  staff       35 May 14  2012 .vimrc -> /Users/irichter/.spf13-vim-3/.vimrc
+lrwxr-xr-x    1 irichter  staff       42 Oct 24  2012 .gitconfig -> /Users/irichter/Dropbox/Dotfiles/gitconfig
+lrwxr-xr-x    1 irichter  staff       35 Mar  5 22:45 .vimrc.bundles.local -> Dropbox/Dotfiles/vim-config/bundles
+lrwxr-xr-x    1 irichter  staff       44 Mar  5 22:33 .spf13-vim-3 -> /Users/irichter/Dropbox/Dotfiles/spf13-vim-3
+lrwxr-xr-x    1 irichter  staff       48 Nov 25  2012 .gdbinit -> /Users/irichter/Dropbox/Dotfiles/Gdbinit/gdbinit
+lrwxr-xr-x    1 irichter  staff       43 Sep 27  2012 .vimrc.bundles -> /Users/irichter/.spf13-vim-3/.vimrc.bundles
+lrwxr-xr-x    1 irichter  staff       45 Mar  5 22:47 .vimrc.local -> Dropbox/Dotfiles/vim-config/vimrc.local.mbpro
+lrwxr-xr-x    1 irichter  staff       40 Jan 15  2013 .profile.disabled -> /Users/irichter/Dropbox/Dotfiles/profile

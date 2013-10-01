@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Ingo Richter.
+ * Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -18,10 +18,11 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
+ *
  */
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
-/*global define, $, brackets */
+/*global define, brackets */
 
 /** Simple extension that adds a "File > Hello World" menu item. Inserts "Hello, world!" at cursor pos. */
 define(function (require, exports, module) {
@@ -77,13 +78,13 @@ define(function (require, exports, module) {
                     codemirror.replaceSelection(allLines.join('\n') + (removedLastLineBreak ? "\n" : ""));
                 } else {
                     var lines = codemirror.getValue(),
-                        allLines = lines.split('\n');
+                        allLines2 = lines.split('\n');
 
-                    allLines.sort(function (a, b) {
+                    allLines2.sort(function (a, b) {
                         return a.localeCompare(b);
                     });
 
-                    codemirror.setValue(allLines.join("\n"));
+                    codemirror.setValue(allLines2.join("\n"));
                 }
             }
         }
@@ -136,7 +137,7 @@ define(function (require, exports, module) {
             maxArrayIndex = lineCount - 1;
 
         for (i = 0; i < lineCount; i++) {
-            var newIndex = getRandomInt(i, maxArrayIndex);
+            var newIndex = getRandomInt(0, maxArrayIndex);
 
             var tmp         = allLines[i];
             allLines[i]     = allLines[newIndex];
@@ -146,32 +147,61 @@ define(function (require, exports, module) {
         codemirror.setValue(allLines.join("\n"));
     }
 
+    /**
+     * Sort all lines in the current Editor and remove duplicates.
+     */
+    function handleRemoveDuplicateLines() {
+        var codemirror = _getCodeMirror(),
+            result = [],
+            seen = [];
+
+        var lines = codemirror.getValue(),
+            allLines = lines.split('\n');
+
+        allLines.sort(function (a, b) {
+            return a.localeCompare(b);
+        });
+
+        allLines.forEach(function (line, number) {
+            if (seen[seen.length - 1] !== line) {
+                seen.push(line);
+                result.push(line);
+            }
+        });
+
+        codemirror.setValue(result.join("\n"));
+    }
+
     // First, register a command - a UI-less object associating an id to a handler
     var COMMAND_SORTLINES = "de.richter.brackets.extension.brackets-sort-text.sortLines";   // package-style naming to avoid collisions
     var COMMAND_REVERSELINES = "de.richter.brackets.extension.brackets-sort-text.reverseLines";   // package-style naming to avoid collisions
     var COMMAND_SORTLINESBYLENGTH = "de.richter.brackets.extension.brackets-sort-text.sortLinesByLength";   // package-style naming to avoid collisions
     var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines";   // package-style naming to avoid collisions
+    var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines";   // package-style naming to avoid collisions
 
-    CommandManager.register("Sort Lines",    COMMAND_SORTLINES,    handleSortLines);
-    CommandManager.register("Reverse Lines", COMMAND_REVERSELINES, handleReverseLines);
-    CommandManager.register("Sort Lines by length", COMMAND_SORTLINESBYLENGTH, handleSortByLength);
-    CommandManager.register("Shuffle Lines", COMMAND_SHUFFLELINES, handleShuffleLines);
+    CommandManager.register("Sort Lines",             COMMAND_SORTLINES,         handleSortLines);
+    CommandManager.register("Reverse Lines",          COMMAND_REVERSELINES,      handleReverseLines);
+    CommandManager.register("Sort Lines by length",   COMMAND_SORTLINESBYLENGTH, handleSortByLength);
+    CommandManager.register("Shuffle Lines",          COMMAND_SHUFFLELINES,      handleShuffleLines);
+    CommandManager.register("Remove Duplicate Lines", COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
 
-    // Then create a menu item bound to the command
-    // The label of the menu item is the name we gave the command (see above)
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
     if (menu) {
-        menu.addMenuItem(COMMAND_SORTLINES,         [{key: "F5"}]);
-        menu.addMenuItem(COMMAND_REVERSELINES,      [{key: "Shift-F5"}]);
-        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F5"}]);
-        menu.addMenuItem(COMMAND_SHUFFLELINES,      [{key: "Alt-F5"}]);
+        menu.addMenuItem(COMMAND_SORTLINES,         [{key: "F6"}]);
+        menu.addMenuItem(COMMAND_REVERSELINES,      [{key: "Shift-F6"}]);
+        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F6"}]);
+        menu.addMenuItem(COMMAND_SHUFFLELINES,      [{key: "Alt-F6"}]);
+        menu.addMenuItem(COMMAND_UNIQUELINES,       [{key: "Ctrl-Alt-F6"}]);
     }
 
-    exports.sortLines         = handleSortLines;
-    exports.reverseLines      = handleReverseLines;
-    exports.sortLinesByLength = handleSortByLength;
-    exports.shuffleLines      = handleShuffleLines;
+    // Public API
+    exports.sortLines            = handleSortLines;
+    exports.reverseLines         = handleReverseLines;
+    exports.sortLinesByLength    = handleSortByLength;
+    exports.shuffleLines         = handleShuffleLines;
+    exports.removeDuplicateLines = handleRemoveDuplicateLines;
+
     // for testing
-    exports._getEditor        = _getEditor;
+    exports._getEditor           = _getEditor;
 });
