@@ -27,6 +27,9 @@
 /*global define */
 
 define({
-    "MENU_LABEL"                        : "Extension",
-    "MENU_ITEM_LABEL"                   : "My Extension…"
+    "SORT_LINES"                : "Sort Lines",
+    "REVERSE_LINES"             : "Reverse Lines",
+    "SORT_LINES_BY_LENGTH"      : "Sort Lines by length",
+    "SHUFFLE_LINES"             : "Shuffle Lines",
+    "REMOVE_DUPLICATE_LINES"    : "Remove Duplicate Lines"
 });

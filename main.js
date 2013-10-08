@@ -30,7 +30,8 @@ define(function (require, exports, module) {
 
     var CommandManager = brackets.getModule("command/CommandManager"),
         EditorManager  = brackets.getModule("editor/EditorManager"),
-        Menus          = brackets.getModule("command/Menus");
+        Menus          = brackets.getModule("command/Menus"),
+        Strings        = require("strings");
 
     function _getEditor() {
         return EditorManager.getFocusedEditor();
@@ -162,7 +163,7 @@ define(function (require, exports, module) {
             return a.localeCompare(b);
         });
 
-        allLines.forEach(function (line, number) {
+        allLines.forEach(function (line) {
             if (seen[seen.length - 1] !== line) {
                 seen.push(line);
                 result.push(line);
@@ -179,11 +180,11 @@ define(function (require, exports, module) {
     var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines";   // package-style naming to avoid collisions
     var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines";   // package-style naming to avoid collisions
 
-    CommandManager.register("Sort Lines",             COMMAND_SORTLINES,         handleSortLines);
-    CommandManager.register("Reverse Lines",          COMMAND_REVERSELINES,      handleReverseLines);
-    CommandManager.register("Sort Lines by length",   COMMAND_SORTLINESBYLENGTH, handleSortByLength);
-    CommandManager.register("Shuffle Lines",          COMMAND_SHUFFLELINES,      handleShuffleLines);
-    CommandManager.register("Remove Duplicate Lines", COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
+    CommandManager.register(Strings.SORT_LINES,             COMMAND_SORTLINES,         handleSortLines);
+    CommandManager.register(Strings.REVERSE_LINES,          COMMAND_REVERSELINES,      handleReverseLines);
+    CommandManager.register(Strings.SORT_LINES_BY_LENGTH,   COMMAND_SORTLINESBYLENGTH, handleSortByLength);
+    CommandManager.register(Strings.SHUFFLE_LINES,          COMMAND_SHUFFLELINES,      handleShuffleLines);
+    CommandManager.register(Strings.REMOVE_DUPLICATE_LINES, COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
 
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
