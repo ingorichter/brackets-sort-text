@@ -12,11 +12,11 @@ A [Brackets](https://github.com/adobe/brackets) extension that provides a couple
 ### How To Use
 The Extension provides a couple of new commands that work on the text lines in your editor. These new commands are available as menu entries added to the **Edit** menu. In the **Edit** menu you'll find
 
-* Sort Lines - F6
-* Reverse Lines - Shift-F6
-* Sort Lines by length - Command-F6
-* Shuffle Lines - Alt-F6
-* Remove Duplicate Lines - Alt-Command-F6
+* Sort Lines - F7
+* Reverse Lines - Shift-F7
+* Sort Lines by length - Command-F7
+* Shuffle Lines - Alt-F7
+* Remove Duplicate Lines - Alt-Command-F7
 
 #### Mode of operation
 All operations work on all lines in the current editor. If there is a selection, then the operation is applied to this selection only (there are exceptions, see below).
@@ -36,3 +36,7 @@ Un-order all lines in the text editor. The functionality was added to test the s
 
 #### Remove Duplicate Lines
 This is helpful to "reduce" a text to omit redundant lines. This operation will sort all lines upfront and then remove the duplicate lines.
+
+## License
+
+MIT-licensed -- see _main.js_ for details.
