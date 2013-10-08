@@ -1,7 +1,7 @@
 {
   "name": "brackets-sort-text",
   "title": "Brackets Sort Text",
-  "description": "Sort Text extension for Brackets",
+  "description": "Sort Text extension for Brackets. Provide operations to sort, reverse, randomize and remove duplicate lines.",
   "author": "Ingo Richter <ingo.richter+github@gmail.com>",
   "license": "MIT",
   "version": "0.1.0",
