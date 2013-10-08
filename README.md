@@ -1,5 +1,7 @@
 ## Brackets Sort Text Extension
 
+[![Build Status](https://travis-ci.org/ingorichter/brackets-sort-text.png?branch=master)](https://travis-ci.org/ingorichter/brackets-sort-text)
+
 A [Brackets](https://github.com/adobe/brackets) extension that provides a couple of utility functions for sorting lines in the current document.
 
 ### Installation
