@@ -24,6 +24,7 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-eslint": "^2.1.0",
     "grunt-mocha": "~0.4.11",
+    "grunt-zip": "^0.16.2",
     "load-grunt-tasks": "~1.0.0",
     "time-grunt": "~1.0.0"
   },

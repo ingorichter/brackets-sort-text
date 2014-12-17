@@ -37,6 +37,7 @@ module.exports = function (grunt) {
     require("time-grunt")(grunt);
     // load all grunt tasks
     require("load-grunt-tasks")(grunt);
+    grunt.loadNpmTasks("grunt-zip");
 
     // configurable paths
     var extensionConfig = {
@@ -98,6 +99,12 @@ module.exports = function (grunt) {
                     dest: ""
                 }]
             }
+        },
+        zip: {
+            multi: {
+                src: ["main.js", "package.json", "README.md", "strings.js", "nls/**", "third_party/**"],
+                dest: "<%= extensionConfig.dist %>/<%= pkg.name %>-<%= pkg.version %>.zip"
+            }
         }
     });
 
@@ -107,7 +114,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("build", [
         "clean:dist",
-        "compress"
+        "zip"
     ]);
 
     grunt.registerTask("default", [
