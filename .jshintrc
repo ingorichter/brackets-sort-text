@@ -13,7 +13,7 @@
     "strict": true,
     "trailing": true,
     "undef": true,
-    "unused": true,
+    "unused": "var",
     "globals" : {
         "chrome": true,
         "module": true,

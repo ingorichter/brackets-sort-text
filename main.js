@@ -21,11 +21,10 @@
  *
  */
 
-
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global define, brackets, naturalSort */
 
-define(function (require, exports, module) {
+define(function (require, exports) {
     "use strict";
 
     var CommandManager = brackets.getModule("command/CommandManager"),

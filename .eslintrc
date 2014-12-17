@@ -1,0 +1,7 @@
+{
+    rules: {
+        "no-multi-spaces": false,
+        "no-underscore-dangle": false,
+        "key-spacing": true
+    }
+}

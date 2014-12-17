@@ -22,82 +22,97 @@
  */
 
 /*jshint camelcase: false, globalstrict: true*/
+/*global require, module */
 
 // # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
+// for performance reasons we"re only matching one level down:
+// "test/spec/{,*/}*.js"
 // use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
+// "test/spec/**/*.js"
 
 module.exports = function (grunt) {
     "use strict";
+
     // show elapsed time at the end
-    require('time-grunt')(grunt);
+    require("time-grunt")(grunt);
     // load all grunt tasks
-    require('load-grunt-tasks')(grunt);
+    require("load-grunt-tasks")(grunt);
 
     // configurable paths
     var extensionConfig = {
-        app: 'app',
-        dist: 'dist'
+        app: "app",
+        dist: "dist"
     };
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON("package.json"),
         extensionConfig: extensionConfig,
         clean: {
             dist: {
                 files: [{
                     dot: true,
                     src: [
-                        '.tmp',
-                        '<%= extensionConfig.dist %>/*',
-                        '!<%= extensionConfig.dist %>/.git*'
+                        ".tmp",
+                        "<%= extensionConfig.dist %>/*",
+                        "!<%= extensionConfig.dist %>/.git*"
                     ]
                 }]
             },
-            server: '.tmp'
+            server: ".tmp"
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: ".jshintrc"
             },
             all: [
-                'Gruntfile.js',
-                '<%= extensionConfig.app %>/main.js',
-                'test/spec/{,*/}*.js',
-                'unittests.js',
-                'strings.js',
-                'nls/**/*.js'
+                "Gruntfile.js",
+                "<%= extensionConfig.app %>/main.js",
+                "test/spec/{,*/}*.js",
+                "unittests.js",
+                "strings.js",
+                "nls/**/*.js"
+            ]
+        },
+        eslint: {
+            options: {
+                config: ".eslintrc"
+            },
+            target: [
+                "Gruntfile.js",
+                "main.js",
+                "test/spec/{,*/}*.js",
+                "unittests.js",
+                "strings.js",
+                "nls/**/*.js"
             ]
         },
         compress: {
             dist: {
                 options: {
-                    archive: '<%= extensionConfig.dist %>/<%= pkg.name %>-<%= pkg.version %>.zip'
+                    archive: "<%= extensionConfig.dist %>/<%= pkg.name %>-<%= pkg.version %>.zip"
                 },
                 files: [{
                     expand: true,
-                    cwd: '',
-                    src: ['main.js', 'package.json', 'README.md', 'strings.js', 'nls/**', 'third_party/**'],
-                    dest: ''
+                    cwd: "",
+                    src: ["main.js", "package.json", "README.md", "strings.js", "nls/**", "third_party/**"],
+                    dest: ""
                 }]
             }
         }
     });
 
-    grunt.registerTask('test', [
-        'mocha'
+    grunt.registerTask("test", [
+        "mocha"
     ]);
 
-    grunt.registerTask('build', [
-        'clean:dist',
-        'compress'
+    grunt.registerTask("build", [
+        "clean:dist",
+        "compress"
     ]);
 
-    grunt.registerTask('default', [
-        'jshint',
-//        'test',
-        'build'
+    grunt.registerTask("default", [
+        "eslint",
+//        "test",
+        "build"
     ]);
 };
