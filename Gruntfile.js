@@ -79,7 +79,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '',
-                    src: ['main.js', 'package.json', 'README.md', 'strings.js', 'nls/**'],
+                    src: ['main.js', 'package.json', 'README.md', 'strings.js', 'nls/**', 'third_party/**'],
                     dest: ''
                 }]
             }

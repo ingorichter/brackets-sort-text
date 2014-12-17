@@ -1,31 +1,30 @@
 /*
  * Copyright (c) 2013 Ingo Richter, Adobe Systems Incorporated. All rights reserved.
- *  
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"), 
- * to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, 
- * and/or sell copies of the Software, and to permit persons to whom the 
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- *  
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *  
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- * 
+ *
  */
 
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
-/*global define, brackets */
+/*global define, brackets, naturalSort */
 
-/** Simple extension that adds a "File > Hello World" menu item. Inserts "Hello, world!" at cursor pos. */
 define(function (require, exports, module) {
     "use strict";
 
@@ -33,6 +32,8 @@ define(function (require, exports, module) {
         EditorManager  = brackets.getModule("editor/EditorManager"),
         Menus          = brackets.getModule("command/Menus"),
         Strings        = require("strings");
+
+    require("third_party/naturalSort");
 
     function _getEditor() {
         return EditorManager.getFocusedEditor();
@@ -43,10 +44,16 @@ define(function (require, exports, module) {
         return editor._codeMirror;
     }
 
+    function getLines(codeMirror) {
+        var lines = codeMirror.getValue(),
+            allLines = lines.split("\n");
+        return allLines;
+    }
+
     // Function to run when the menu item is clicked
     function handleSortLines() {
-        var editor = exports._getEditor();
-        var codemirror = _getCodeMirror();
+        var editor = exports._getEditor(),
+            codemirror = editor._codeMirror;
 
         // TODO:
         // * sort all lines (+)
@@ -58,8 +65,6 @@ define(function (require, exports, module) {
         // * sort lines by length (+)
         if (editor) {
             if (editor.lineCount() > 0) {
-                console.log("Let's get it sorted");
-
                 if (codemirror.somethingSelected()) {
                     var selection = codemirror.getSelection();
                     var removedLastLineBreak = false;
@@ -71,19 +76,18 @@ define(function (require, exports, module) {
                         removedLastLineBreak = true;
                     }
 
-                    var allLines = selection.split('\n');
+                    var allLines = selection.split("\n");
 
                     allLines.sort(function (a, b) {
-                        return a.localeCompare(b);
+                        return naturalSort(a, b);
                     });
 
-                    codemirror.replaceSelection(allLines.join('\n') + (removedLastLineBreak ? "\n" : ""));
+                    codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
                 } else {
-                    var lines = codemirror.getValue(),
-                        allLines2 = lines.split('\n');
+                    var allLines2 = getLines(codemirror);
 
                     allLines2.sort(function (a, b) {
-                        return a.localeCompare(b);
+                        return naturalSort(a, b);
                     });
 
                     codemirror.setValue(allLines2.join("\n"));
@@ -93,10 +97,8 @@ define(function (require, exports, module) {
     }
 
     function handleReverseLines() {
-        var codemirror = _getCodeMirror();
-
-        var lines = codemirror.getValue(),
-            allLines = lines.split('\n');
+        var codemirror = _getCodeMirror(),
+            allLines = getLines(codemirror);
 
         var i;
         for (i = 0; i < allLines.length / 2; i++) {
@@ -111,10 +113,8 @@ define(function (require, exports, module) {
     }
 
     function handleSortByLength() {
-        var codemirror = _getCodeMirror();
-
-        var lines = codemirror.getValue(),
-            allLines = lines.split('\n');
+        var codemirror = _getCodeMirror(),
+            allLines = getLines(codemirror);
 
         allLines.sort(function (a, b) {
             return a.length - b.length;
@@ -128,10 +128,8 @@ define(function (require, exports, module) {
     }
 
     function handleShuffleLines() {
-        var codemirror = _getCodeMirror();
-
-        var lines = codemirror.getValue(),
-            allLines = lines.split('\n');
+        var codemirror = _getCodeMirror(),
+            allLines = getLines(codemirror);
 
         // probably not the most efficient way of doing it...
         var i,
@@ -154,14 +152,12 @@ define(function (require, exports, module) {
      */
     function handleRemoveDuplicateLines() {
         var codemirror = _getCodeMirror(),
+            allLines = getLines(codemirror),
             result = [],
             seen = [];
 
-        var lines = codemirror.getValue(),
-            allLines = lines.split('\n');
-
         allLines.sort(function (a, b) {
-            return a.localeCompare(b);
+            return naturalSort(a, b);
         });
 
         allLines.forEach(function (line) {

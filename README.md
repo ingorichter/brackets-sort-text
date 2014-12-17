@@ -39,6 +39,9 @@ Un-order all lines in the text editor. The functionality was added to test the s
 #### Remove Duplicate Lines
 This is helpful to "reduce" a text to omit redundant lines. This operation will sort all lines upfront and then remove the duplicate lines.
 
+## Third Party Libraries
+[JavaScript Natural Sort](https://github.com/Huddle/javascript-natural-sort)
+
 ## License
 
 MIT-licensed -- see _main.js_ for details.
