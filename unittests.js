@@ -60,7 +60,7 @@ define(function (require) {
             testDocument = mock.doc;
 
             // inject the editor
-            spyOn(LineSorter, '_getEditor').andCallFake(function () {
+            spyOn(LineSorter, "_getEditor").andCallFake(function () {
                 return testEditor;
             });
 
@@ -90,6 +90,27 @@ define(function (require) {
                 var lines = codeMirror.getValue();
 
                 expect(lines.split("\n").toString()).toBe("Wisconsin,,Madison,Ann Arbor,New York,San Francisco,,Denver,Boston");
+            });
+
+            describe("Language Agnostic", function () {
+                beforeEach(function () {
+                    testDocument.setText("Telefon\nZebra\nBus\nAutobahn");
+                });
+
+                it("should sort lines in german", function () {
+                    LineSorter.sortLines();
+                    var lines = codeMirror.getValue();
+
+                    expect(lines.split("\n").toString()).toBe("Autobahn,Bus,Telefon,Zebra");
+                });
+
+                it("should sort lines properly with comma and quotes (https://github.com/ingorichter/brackets-sort-text/issues/4)", function () {
+                    testDocument.setText("'angular',\n'angular-resource',\n'jquery',\n'jquery-ui',");
+                    LineSorter.sortLines();
+                    var lines = codeMirror.getValue();
+
+                    expect(lines.split("\n").toString()).toBe("'angular',,'angular-resource',,'jquery',,'jquery-ui',");
+                });
             });
         });
 
