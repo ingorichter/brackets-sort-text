@@ -95,11 +95,11 @@ define(function (require, exports) {
         }
     }
 	
-	function handleReverseLinesSelection(){
-		   var editor = exports._getEditor(),
+	function handleReverseLinesSelection() {
+		var editor = exports._getEditor(),
             codemirror = editor._codeMirror;
             
-			if (editor) {
+		if (editor) {
             if (editor.lineCount() > 0) {
                 if (codemirror.somethingSelected()) {
 					var selection = codemirror.getSelection();
@@ -113,32 +113,17 @@ define(function (require, exports) {
                     }
 					
 					var allLines = selection.split("\n");
-					 var i;
+					var i;
 					for (i = 0; i < allLines.length / 2; i++) {
 						var index = allLines.length - 1 - i;
 						var tmp         = allLines[i];
 						allLines[i]     = allLines[index];
 						allLines[index] = tmp;
-					
 					}
 					codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
-					}
-				else {
-					var i; 
-					for (i = 0; i < allLines.length / 2; i++) { 
-					var index = allLines.length - 1 - i; 
-					var tmp         = allLines[i]; 
-					allLines[i]     = allLines[index]; 
-					allLines[index] = tmp; 
-
-				
-				}
-				codemirror.setValue(allLines.join("\n"));
 				}
 			}
-		
-		
-	}
+		}
 	}
 		
     
