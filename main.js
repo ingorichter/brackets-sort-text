@@ -28,9 +28,9 @@ define(function (require, exports) {
     "use strict";
 
     var CommandManager = brackets.getModule("command/CommandManager"),
-        EditorManager  = brackets.getModule("editor/EditorManager"),
-        Menus          = brackets.getModule("command/Menus"),
-        Strings        = require("strings");
+        EditorManager = brackets.getModule("editor/EditorManager"),
+        Menus = brackets.getModule("command/Menus"),
+        Strings = require("strings");
 
     require("third_party/naturalSort");
 
@@ -116,8 +116,9 @@ define(function (require, exports) {
                 var i;
                 for (i = 0; i < allLines.length / 2; i++) {
                     var index = allLines.length - 1 - i;
-                    var tmp         = allLines[i];
-                    allLines[i]     = allLines[index];
+
+                    var tmp = allLines[i];
+                    allLines[i] = allLines[index];
                     allLines[index] = tmp;
                 }
 
@@ -136,8 +137,8 @@ define(function (require, exports) {
         for (i = 0; i < allLines.length / 2; i++) {
             var index = allLines.length - 1 - i;
 
-            var tmp         = allLines[i];
-            allLines[i]     = allLines[index];
+            var tmp = allLines[i];
+            allLines[i] = allLines[index];
             allLines[index] = tmp;
         }
 
@@ -171,8 +172,8 @@ define(function (require, exports) {
         for (i = 0; i < lineCount; i++) {
             var newIndex = getRandomInt(0, maxArrayIndex);
 
-            var tmp         = allLines[i];
-            allLines[i]     = allLines[newIndex];
+            var tmp = allLines[i];
+            allLines[i] = allLines[newIndex];
             allLines[newIndex] = tmp;
         }
 
@@ -210,32 +211,32 @@ define(function (require, exports) {
     var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines";   // package-style naming to avoid collisions
     var COMMAND_REVERSELINESSELECTION = "de.richter.brackets.extension.brackets-sort-text.reverseLinesSelection";
 
-    CommandManager.register(Strings.SORT_LINES,                 COMMAND_SORTLINES,         handleSortLines);
-    CommandManager.register(Strings.REVERSE_LINES,              COMMAND_REVERSELINES,      handleReverseLines);
-    CommandManager.register(Strings.REVERSE_LINES_SELECTION,    COMMAND_REVERSELINESSELECTION,      handleReverseLinesSelection);
-    CommandManager.register(Strings.SORT_LINES_BY_LENGTH,       COMMAND_SORTLINESBYLENGTH, handleSortByLength);
-    CommandManager.register(Strings.SHUFFLE_LINES,              COMMAND_SHUFFLELINES,      handleShuffleLines);
-    CommandManager.register(Strings.REMOVE_DUPLICATE_LINES,     COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
+    CommandManager.register(Strings.SORT_LINES, COMMAND_SORTLINES, handleSortLines);
+    CommandManager.register(Strings.REVERSE_LINES, COMMAND_REVERSELINES, handleReverseLines);
+    CommandManager.register(Strings.REVERSE_LINES_SELECTION, COMMAND_REVERSELINESSELECTION, handleReverseLinesSelection);
+    CommandManager.register(Strings.SORT_LINES_BY_LENGTH, COMMAND_SORTLINESBYLENGTH, handleSortByLength);
+    CommandManager.register(Strings.SHUFFLE_LINES, COMMAND_SHUFFLELINES, handleShuffleLines);
+    CommandManager.register(Strings.REMOVE_DUPLICATE_LINES, COMMAND_UNIQUELINES, handleRemoveDuplicateLines);
 
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
     if (menu) {
-        menu.addMenuItem(COMMAND_SORTLINES,             [{key: "F7"}]);
-        menu.addMenuItem(COMMAND_REVERSELINES,          [{key: "Shift-F7"}]);
+        menu.addMenuItem(COMMAND_SORTLINES, [{key: "F7"}]);
+        menu.addMenuItem(COMMAND_REVERSELINES, [{key: "Shift-F7"}]);
         menu.addMenuItem(COMMAND_REVERSELINESSELECTION, [{key: "Shift-Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH,     [{key: "Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SHUFFLELINES,          [{key: "Alt-F7"}]);
-        menu.addMenuItem(COMMAND_UNIQUELINES,           [{key: "Ctrl-Alt-F7"}]);
+        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F7"}]);
+        menu.addMenuItem(COMMAND_SHUFFLELINES, [{key: "Alt-F7"}]);
+        menu.addMenuItem(COMMAND_UNIQUELINES, [{key: "Ctrl-Alt-F7"}]);
     }
 
     // Public API
-    exports.sortLines               = handleSortLines;
-    exports.reverseLines            = handleReverseLines;
-    exports.reverseLinesSelection   = handleReverseLinesSelection;
-    exports.sortLinesByLength       = handleSortByLength;
-    exports.shuffleLines            = handleShuffleLines;
-    exports.removeDuplicateLines    = handleRemoveDuplicateLines;
+    exports.sortLines = handleSortLines;
+    exports.reverseLines = handleReverseLines;
+    exports.reverseLinesSelection = handleReverseLinesSelection;
+    exports.sortLinesByLength = handleSortByLength;
+    exports.shuffleLines = handleShuffleLines;
+    exports.removeDuplicateLines = handleRemoveDuplicateLines;
 
     // for testing
-    exports._getEditor              = _getEditor;
+    exports._getEditor = _getEditor;
 });

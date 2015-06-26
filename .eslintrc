@@ -1,7 +1,7 @@
 {
     rules: {
-        "no-multi-spaces": false,
-        "no-underscore-dangle": false,
-        "key-spacing": true
+        "no-multi-spaces": 2,
+        "no-underscore-dangle": 0,
+        "key-spacing": [1, { "beforeColon": false, "afterColon": true }]
     }
 }

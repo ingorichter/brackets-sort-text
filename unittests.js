@@ -29,7 +29,7 @@ define(function (require) {
     "use strict";
 
     var SpecRunnerUtils = brackets.getModule("spec/SpecRunnerUtils"),
-        LineSorter      = require("main");
+        LineSorter = require("main");
 
     describe("Sort Text", function () {
         var testEditor,
