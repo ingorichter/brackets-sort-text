@@ -36,5 +36,9 @@
       "name": "s5rockhoppers",
       "url": "https://github.com/s5rockhoppers"
     }
+  ],
+  "i18n": [
+    "en",
+    "de"
   ]
 }
