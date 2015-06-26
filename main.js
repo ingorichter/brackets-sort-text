@@ -94,40 +94,41 @@ define(function (require, exports) {
             }
         }
     }
-	
-	function handleReverseLinesSelection() {
-		var editor = exports._getEditor(),
+
+  function handleReverseLinesSelection() {
+    var editor = exports._getEditor(),
             codemirror = editor._codeMirror;
-            
-		if (editor) {
-            if (editor.lineCount() > 0) {
-                if (codemirror.somethingSelected()) {
-					var selection = codemirror.getSelection();
-                    var removedLastLineBreak = false;
-					
-					// preserve the last line break, because the last fully selected line has
-                    // a line break at the end. We add this after the sort
-                    if (selection.lastIndexOf("\n") === (selection.length - 1)) {
-                        selection = selection.substr(0, selection.length - 1);
-                        removedLastLineBreak = true;
-                    }
-					
-					var allLines = selection.split("\n");
-					var i;
-					for (i = 0; i < allLines.length / 2; i++) {
-						var index = allLines.length - 1 - i;
-						var tmp         = allLines[i];
-						allLines[i]     = allLines[index];
-						allLines[index] = tmp;
-					}
-					codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
-				}
-			}
-		}
-	}
-		
-    
-	function handleReverseLines() {
+
+    if (editor) {
+        if (editor.lineCount() > 0) {
+            if (codemirror.somethingSelected()) {
+                var selection = codemirror.getSelection();
+                var removedLastLineBreak = false;
+
+                // preserve the last line break, because the last fully selected line has
+                // a line break at the end. We add this after the sort
+                if (selection.lastIndexOf("\n") === (selection.length - 1)) {
+                    selection = selection.substr(0, selection.length - 1);
+                    removedLastLineBreak = true;
+                }
+
+                var allLines = selection.split("\n");
+                var i;
+                for (i = 0; i < allLines.length / 2; i++) {
+                    var index = allLines.length - 1 - i;
+                    var tmp         = allLines[i];
+                    allLines[i]     = allLines[index];
+                    allLines[index] = tmp;
+                }
+
+                codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
+            }
+        }
+    }
+  }
+
+
+  function handleReverseLines() {
         var codemirror = _getCodeMirror(),
             allLines = getLines(codemirror);
 
@@ -207,34 +208,34 @@ define(function (require, exports) {
     var COMMAND_SORTLINESBYLENGTH = "de.richter.brackets.extension.brackets-sort-text.sortLinesByLength";   // package-style naming to avoid collisions
     var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines";   // package-style naming to avoid collisions
     var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines";   // package-style naming to avoid collisions
-	var COMMAND_REVERSELINESSELECTION = "de.richter.brackets.extension.brackets-sort-text.reverseLinesSelection";
-	
-    CommandManager.register(Strings.SORT_LINES,             COMMAND_SORTLINES,         handleSortLines);
-    CommandManager.register(Strings.REVERSE_LINES,          COMMAND_REVERSELINES,      handleReverseLines);
-	CommandManager.register(Strings.REVERSE_LINES_SELECTION,          COMMAND_REVERSELINESSELECTION,      handleReverseLinesSelection);
-    CommandManager.register(Strings.SORT_LINES_BY_LENGTH,   COMMAND_SORTLINESBYLENGTH, handleSortByLength);
-    CommandManager.register(Strings.SHUFFLE_LINES,          COMMAND_SHUFFLELINES,      handleShuffleLines);
-    CommandManager.register(Strings.REMOVE_DUPLICATE_LINES, COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
+    var COMMAND_REVERSELINESSELECTION = "de.richter.brackets.extension.brackets-sort-text.reverseLinesSelection";
+
+    CommandManager.register(Strings.SORT_LINES,                 COMMAND_SORTLINES,         handleSortLines);
+    CommandManager.register(Strings.REVERSE_LINES,              COMMAND_REVERSELINES,      handleReverseLines);
+    CommandManager.register(Strings.REVERSE_LINES_SELECTION,    COMMAND_REVERSELINESSELECTION,      handleReverseLinesSelection);
+    CommandManager.register(Strings.SORT_LINES_BY_LENGTH,       COMMAND_SORTLINESBYLENGTH, handleSortByLength);
+    CommandManager.register(Strings.SHUFFLE_LINES,              COMMAND_SHUFFLELINES,      handleShuffleLines);
+    CommandManager.register(Strings.REMOVE_DUPLICATE_LINES,     COMMAND_UNIQUELINES,       handleRemoveDuplicateLines);
 
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
     if (menu) {
-        menu.addMenuItem(COMMAND_SORTLINES,         [{key: "F7"}]);
-        menu.addMenuItem(COMMAND_REVERSELINES,      [{key: "Shift-F7"}]);
-		menu.addMenuItem(COMMAND_REVERSELINESSELECTION,      [{key: "Shift-Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SHUFFLELINES,      [{key: "Alt-F7"}]);
-        menu.addMenuItem(COMMAND_UNIQUELINES,       [{key: "Ctrl-Alt-F7"}]);
+        menu.addMenuItem(COMMAND_SORTLINES,             [{key: "F7"}]);
+        menu.addMenuItem(COMMAND_REVERSELINES,          [{key: "Shift-F7"}]);
+        menu.addMenuItem(COMMAND_REVERSELINESSELECTION, [{key: "Shift-Ctrl-F7"}]);
+        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH,     [{key: "Ctrl-F7"}]);
+        menu.addMenuItem(COMMAND_SHUFFLELINES,          [{key: "Alt-F7"}]);
+        menu.addMenuItem(COMMAND_UNIQUELINES,           [{key: "Ctrl-Alt-F7"}]);
     }
 
     // Public API
-    exports.sortLines            = handleSortLines;
-    exports.reverseLines         = handleReverseLines;
-	exports.reverseLinesSelection         = handleReverseLinesSelection;
-    exports.sortLinesByLength    = handleSortByLength;
-    exports.shuffleLines         = handleShuffleLines;
-    exports.removeDuplicateLines = handleRemoveDuplicateLines;
+    exports.sortLines               = handleSortLines;
+    exports.reverseLines            = handleReverseLines;
+    exports.reverseLinesSelection   = handleReverseLinesSelection;
+    exports.sortLinesByLength       = handleSortByLength;
+    exports.shuffleLines            = handleShuffleLines;
+    exports.removeDuplicateLines    = handleRemoveDuplicateLines;
 
     // for testing
-    exports._getEditor           = _getEditor;
+    exports._getEditor              = _getEditor;
 });
