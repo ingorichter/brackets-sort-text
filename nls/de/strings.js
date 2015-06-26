@@ -29,6 +29,7 @@
 define({
     "SORT_LINES"             : "Zeilen Sortieren",
     "REVERSE_LINES"          : "Zeilenreihenfolge umdrehen",
+	"REVERSE_LINES_SELECTION"          : "Reverse line selection",
     "SORT_LINES_BY_LENGTH"   : "Zeilen nach Länge sortieren",
     "SHUFFLE_LINES"          : "Zeilen durcheinander",
     "REMOVE_DUPLICATE_LINES" : "Doppelte Zeilen entfernen"

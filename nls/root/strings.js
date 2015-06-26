@@ -29,6 +29,7 @@
 define({
     "SORT_LINES"             : "Sort Lines",
     "REVERSE_LINES"          : "Reverse Lines",
+	"REVERSE_LINES_SELECTION"          : "Reverse Lines Selection",
     "SORT_LINES_BY_LENGTH"   : "Sort Lines by length",
     "SHUFFLE_LINES"          : "Shuffle Lines",
     "REMOVE_DUPLICATE_LINES" : "Remove Duplicate Lines"

@@ -30,6 +30,9 @@ All lines in the current text editor will be alphabetically sorted. If you speci
 #### Reverse Lines
 All lines in the current text editor are reversed. This means that the previously last line is the first line after the operation has finished. You can use this operation to toggle the sort order.
 
+#### Reverse Lines Selection
+All lines in the current selection are reversed. This means that the previously last line is the first line after the operation has finished. You can use this operation to toggle the sort order.
+
 #### Sort Lines by length
 I don't have a practical example for this operation. But all lines are sorted by length and the shortest line will be the first line. The functionality was added to test the sort operation.
 
