@@ -4,7 +4,7 @@
   "description": "Sort Text extension for Brackets. Provide operations to sort, reverse, randomize and remove duplicate lines.",
   "author": "Ingo Richter <ingo.richter+github@gmail.com>",
   "license": "MIT",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/ingorichter/brackets-sort-text/",
   "bugs": "https://github.com/ingorichter/brackets-sort-text/issues",
   "repository": {
@@ -40,5 +40,8 @@
   "i18n": [
     "en",
     "de"
-  ]
+  ],
+  "dependencies": {
+    "eslint": "^7.1.0"
+  }
 }

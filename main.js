@@ -128,7 +128,6 @@ define(function (require, exports) {
     }
   }
 
-
   function handleReverseLines() {
         var codemirror = _getCodeMirror(),
             allLines = getLines(codemirror);
@@ -162,7 +161,17 @@ define(function (require, exports) {
 
     function handleShuffleLines() {
         var codemirror = _getCodeMirror(),
-            allLines = getLines(codemirror);
+            selection = codemirror.getSelection(),
+            removedLastLineBreak = false;
+
+        // preserve the last line break, because the last fully selected line has
+        // a line break at the end. We add this after the sort
+        if (selection.lastIndexOf("\n") === (selection.length - 1)) {
+            selection = selection.substr(0, selection.length - 1);
+            removedLastLineBreak = true;
+        }
+
+        var allLines = selection.split("\n");
 
         // probably not the most efficient way of doing it...
         var i,
@@ -177,7 +186,7 @@ define(function (require, exports) {
             allLines[newIndex] = tmp;
         }
 
-        codemirror.setValue(allLines.join("\n"));
+        codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
     }
 
     /**
