@@ -49,6 +49,30 @@ define(function (require, exports) {
         return allLines;
     }
 
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function swap(array, indexA, indexB) {
+        var tmp = array[indexA];
+        array[indexA] = array[indexB];
+        array[indexB] = tmp;
+    }
+
+    function _shuffleArray(arrayOfStrings) {
+        // probably not the most efficient way of doing it...
+        var i,
+            entries = arrayOfStrings.length,
+            maxArrayIndex = entries - 1;
+
+        for (i = 0; i < entries; i++) {
+            var newIndex = getRandomInt(0, maxArrayIndex);
+            swap(arrayOfStrings, i, newIndex);
+        }
+
+        return arrayOfStrings;
+    }
+
     // Function to run when the menu item is clicked
     function handleSortLines() {
         var editor = exports._getEditor(),
@@ -95,41 +119,40 @@ define(function (require, exports) {
         }
     }
 
-  function handleReverseLinesSelection() {
-    var editor = exports._getEditor(),
+    function handleReverseLinesSelection() {
+        var editor = exports._getEditor(),
             codemirror = editor._codeMirror;
 
-    if (editor) {
-        if (editor.lineCount() > 0) {
-            if (codemirror.somethingSelected()) {
-                var selection = codemirror.getSelection();
-                var removedLastLineBreak = false;
+        if (editor) {
+            if (editor.lineCount() > 0) {
+                if (codemirror.somethingSelected()) {
+                    var selection = codemirror.getSelection();
+                    var removedLastLineBreak = false;
 
-                // preserve the last line break, because the last fully selected line has
-                // a line break at the end. We add this after the sort
-                if (selection.lastIndexOf("\n") === (selection.length - 1)) {
-                    selection = selection.substr(0, selection.length - 1);
-                    removedLastLineBreak = true;
+                    // preserve the last line break, because the last fully selected line has
+                    // a line break at the end. We add this after the sort
+                    if (selection.lastIndexOf("\n") === (selection.length - 1)) {
+                        selection = selection.substr(0, selection.length - 1);
+                        removedLastLineBreak = true;
+                    }
+
+                    var allLines = selection.split("\n");
+                    var i;
+                    for (i = 0; i < allLines.length / 2; i++) {
+                        var index = allLines.length - 1 - i;
+
+                        var tmp = allLines[i];
+                        allLines[i] = allLines[index];
+                        allLines[index] = tmp;
+                    }
+
+                    codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
                 }
-
-                var allLines = selection.split("\n");
-                var i;
-                for (i = 0; i < allLines.length / 2; i++) {
-                    var index = allLines.length - 1 - i;
-
-                    var tmp = allLines[i];
-                    allLines[i] = allLines[index];
-                    allLines[index] = tmp;
-                }
-
-                codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
             }
         }
     }
-  }
 
-
-  function handleReverseLines() {
+    function handleReverseLines() {
         var codemirror = _getCodeMirror(),
             allLines = getLines(codemirror);
 
@@ -156,28 +179,31 @@ define(function (require, exports) {
         codemirror.setValue(allLines.join("\n"));
     }
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
     function handleShuffleLines() {
-        var codemirror = _getCodeMirror(),
-            allLines = getLines(codemirror);
+        var editor = exports._getEditor(),
+            codemirror = editor._codeMirror;
 
-        // probably not the most efficient way of doing it...
-        var i,
-            lineCount = allLines.length,
-            maxArrayIndex = lineCount - 1;
+        if (editor.lineCount() > 0) {
+            if (codemirror.somethingSelected()) {
+                var selection = codemirror.getSelection();
+                var removedLastLineBreak = false;
 
-        for (i = 0; i < lineCount; i++) {
-            var newIndex = getRandomInt(0, maxArrayIndex);
+                // preserve the last line break, because the last fully selected line has
+                // a line break at the end. We add this after the sort
+                if (selection.lastIndexOf("\n") === (selection.length - 1)) {
+                    selection = selection.substr(0, selection.length - 1);
+                    removedLastLineBreak = true;
+                }
 
-            var tmp = allLines[i];
-            allLines[i] = allLines[newIndex];
-            allLines[newIndex] = tmp;
+                var allLines = _shuffleArray(selection.split("\n"));
+
+                codemirror.replaceSelection(allLines.join("\n") + (removedLastLineBreak ? "\n" : ""));
+            } else {
+                var allLines = getLines(codemirror),
+                    result = _shuffleArray(allLines);
+                codemirror.setValue(result.join("\n"));
+            }
         }
-
-        codemirror.setValue(allLines.join("\n"));
     }
 
     /**
@@ -204,11 +230,11 @@ define(function (require, exports) {
     }
 
     // First, register a command - a UI-less object associating an id to a handler
-    var COMMAND_SORTLINES = "de.richter.brackets.extension.brackets-sort-text.sortLines";   // package-style naming to avoid collisions
-    var COMMAND_REVERSELINES = "de.richter.brackets.extension.brackets-sort-text.reverseLines";   // package-style naming to avoid collisions
-    var COMMAND_SORTLINESBYLENGTH = "de.richter.brackets.extension.brackets-sort-text.sortLinesByLength";   // package-style naming to avoid collisions
-    var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines";   // package-style naming to avoid collisions
-    var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines";   // package-style naming to avoid collisions
+    var COMMAND_SORTLINES = "de.richter.brackets.extension.brackets-sort-text.sortLines"; // package-style naming to avoid collisions
+    var COMMAND_REVERSELINES = "de.richter.brackets.extension.brackets-sort-text.reverseLines"; // package-style naming to avoid collisions
+    var COMMAND_SORTLINESBYLENGTH = "de.richter.brackets.extension.brackets-sort-text.sortLinesByLength"; // package-style naming to avoid collisions
+    var COMMAND_SHUFFLELINES = "de.richter.brackets.extension.brackets-sort-text.shuffleLines"; // package-style naming to avoid collisions
+    var COMMAND_UNIQUELINES = "de.richter.brackets.extension.brackets-sort-text.uniqueLines"; // package-style naming to avoid collisions
     var COMMAND_REVERSELINESSELECTION = "de.richter.brackets.extension.brackets-sort-text.reverseLinesSelection";
 
     CommandManager.register(Strings.SORT_LINES, COMMAND_SORTLINES, handleSortLines);
@@ -221,12 +247,24 @@ define(function (require, exports) {
     var menu = Menus.getMenu(Menus.AppMenuBar.EDIT_MENU);
     // this check is there to prevent the testrunnner from failing to load the test
     if (menu) {
-        menu.addMenuItem(COMMAND_SORTLINES, [{key: "F7"}]);
-        menu.addMenuItem(COMMAND_REVERSELINES, [{key: "Shift-F7"}]);
-        menu.addMenuItem(COMMAND_REVERSELINESSELECTION, [{key: "Shift-Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{key: "Ctrl-F7"}]);
-        menu.addMenuItem(COMMAND_SHUFFLELINES, [{key: "Alt-F7"}]);
-        menu.addMenuItem(COMMAND_UNIQUELINES, [{key: "Ctrl-Alt-F7"}]);
+        menu.addMenuItem(COMMAND_SORTLINES, [{
+            key: "F7"
+        }]);
+        menu.addMenuItem(COMMAND_REVERSELINES, [{
+            key: "Shift-F7"
+        }]);
+        menu.addMenuItem(COMMAND_REVERSELINESSELECTION, [{
+            key: "Shift-Ctrl-F7"
+        }]);
+        menu.addMenuItem(COMMAND_SORTLINESBYLENGTH, [{
+            key: "Ctrl-F7"
+        }]);
+        menu.addMenuItem(COMMAND_SHUFFLELINES, [{
+            key: "Alt-F7"
+        }]);
+        menu.addMenuItem(COMMAND_UNIQUELINES, [{
+            key: "Ctrl-Alt-F7"
+        }]);
     }
 
     // Public API

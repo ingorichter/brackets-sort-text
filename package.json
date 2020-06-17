@@ -4,7 +4,7 @@
   "description": "Sort Text extension for Brackets. Provide operations to sort, reverse, randomize and remove duplicate lines.",
   "author": "Ingo Richter <ingo.richter+github@gmail.com>",
   "license": "MIT",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/ingorichter/brackets-sort-text/",
   "bugs": "https://github.com/ingorichter/brackets-sort-text/issues",
   "repository": {
@@ -17,16 +17,16 @@
     "utils"
   ],
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-compress": "~0.13.0",
-    "grunt-contrib-jshint": "~0.11.2",
-    "grunt-eslint": "^15.0.0",
-    "grunt-mocha": "~0.4.13",
-    "grunt-zip": "^0.16.2",
-    "load-grunt-tasks": "~3.2.0",
-    "time-grunt": "~1.2.1"
+    "grunt": "~1.1.0",
+    "grunt-cli": "~1.3.2",
+    "grunt-contrib-clean": "~2.0.0",
+    "grunt-contrib-compress": "~1.6.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-eslint": "^23.0.0",
+    "grunt-mocha": "^1.2.0",
+    "grunt-zip": "^0.18.2",
+    "load-grunt-tasks": "~5.1.0",
+    "time-grunt": "^2.0.0"
   },
   "engines": {
     "brackets": ">=0.30.0"
@@ -40,5 +40,8 @@
   "i18n": [
     "en",
     "de"
-  ]
+  ],
+  "dependencies": {
+    "eslint": "^7.2.0"
+  }
 }
